@@ -1,0 +1,18 @@
+telegram:
+  token: telegram_token
+  chat_id: chat_id
+
+script:
+  - type: random_message
+    messages:
+      - Buen día, Betz 👋🏽
+      - Hola Eze 😀
+      - Cómo va, dude!? 🤖
+  - type: dollar
+  - type: random_gif
+    tags:
+      - morning
+      - hello
+
+giphy:
+  token: giphy_token
