@@ -16,3 +16,6 @@ script:
 
 giphy:
   token: giphy_token
+
+openweather:
+  token: openweather_token
