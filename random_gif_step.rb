@@ -17,8 +17,7 @@ class RandomGifStep < TelegramStep
   end
 
   def random_giphy_tag
-    tags = %w[morning hi hello]
-    tags.sample
+    @payload['tags'].sample
   end
 
   def handle_step
