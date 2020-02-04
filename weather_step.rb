@@ -11,7 +11,11 @@ class WeatherStep < TelegramStep
   end
 
   def request_weather
-    response = Faraday.get "https://api.openweathermap.org/data/2.5/weather?q=#{@payload['city']}&APPID=#{@openweather_token}"
+    response = Faraday.get 'https://api.openweathermap.org/data/2.5/weather'\
+      "?lat=#{@payload['lat']}"\
+      "&lon=#{@payload['lon']}"\
+      '&units=metric'\
+      "&APPID=#{@openweather_token}"
     JSON.parse(response.body)
   end
 
@@ -34,7 +38,7 @@ class WeatherStep < TelegramStep
   end
 
   def format_temp(t)
-    "#{(t / 10).round(2)}ºC"
+    "#{t.round(2)}ºC"
   end
 
   def handle_step
@@ -45,7 +49,7 @@ class WeatherStep < TelegramStep
     feels_like = format_temp(weather['main']['feels_like'])
     temp_min = format_temp(weather['main']['temp_min'])
     temp_max = format_temp(weather['main']['temp_max'])
-    humidity = format_temp(weather['main']['humidity'])
+    humidity = weather['main']['humidity']
 
     text = "*T:* #{temp} #{emoji} (ST: #{feels_like})\n"\
       "MIN: #{temp_min} MAX: #{temp_max}\n"\
