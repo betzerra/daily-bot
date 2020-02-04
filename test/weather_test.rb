@@ -8,8 +8,7 @@ class WeatherStepTest < StepTest
     stubs = Faraday::Adapter::Test::Stubs.new
     stubs.get('data/2.5/weather') do |req|
       assert_equal 'openweather_token', req.params['APPID']
-      assert_equal '-34.61', req.params['lat']
-      assert_equal '-58.38', req.params['lon']
+      assert_equal 'Buenos Aires', req.params['q']
 
       [
         200,

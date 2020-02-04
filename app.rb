@@ -1,31 +1,34 @@
-require 'json'
 require 'yaml'
-
 require 'telegram/bot'
 
+require_relative 'lib/config'
 require_relative 'lib/dollar_step'
 require_relative 'lib/random_gif_step'
 require_relative 'lib/random_message_step'
 require_relative 'lib/weather_step'
 
-config = YAML.load_file('config.yml')
+STEP_CLASSES = {
+  'dollar' => DollarStep,
+  'random_gif' => RandomGifStep,
+  'random_message' => RandomMessageStep,
+  'weather' => WeatherStep
+}.freeze
 
-telegram_token = config['telegram']['token']
-chat_id = config['telegram']['chat_id']
+config = Config.new(YAML.load_file('config.yml'))
 
-steps = config['script'].map do |i|
-  case i['type']
-  when 'dollar'
-    DollarStep.new(telegram_token, chat_id, i)
-  when 'random_gif'
-    RandomGifStep.new(telegram_token, chat_id, i)
-  when 'random_message'
-    RandomMessageStep.new(telegram_token, chat_id, i)
-  when 'weather'
-    WeatherStep.new(telegram_token, chat_id, i)
-  end
+@telegram_token = config.telegram_token
+@chat_id = config.telegram_chat_id
+
+def create_object(step_class, payload)
+  step_class.new(@telegram_token, @chat_id, payload)
 end
 
-steps.each do |i|
-  i.handle_step
+steps = config.steps.map do |payload|
+  type = payload['type']
+  step_class = STEP_CLASSES[type]
+  raise "Class not defined for step #{type}" unless step_class
+
+  create_object(step_class, payload)
 end
+
+steps.each(&:handle_step)
