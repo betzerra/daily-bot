@@ -12,19 +12,17 @@ config = YAML.load_file('config.yml')
 
 telegram_token = config['telegram']['token']
 chat_id = config['telegram']['chat_id']
-giphy_token = config['giphy']['token']
-openweather_token = config['openweather']['token']
 
 steps = config['script'].map do |i|
   case i['type']
   when 'dollar'
     DollarStep.new(telegram_token, chat_id, i)
   when 'random_gif'
-    RandomGifStep.new(telegram_token, chat_id, giphy_token, i)
+    RandomGifStep.new(telegram_token, chat_id, i)
   when 'random_message'
     RandomMessageStep.new(telegram_token, chat_id, i)
   when 'weather'
-    WeatherStep.new(telegram_token, chat_id, openweather_token, i)
+    WeatherStep.new(telegram_token, chat_id, i)
   end
 end
 

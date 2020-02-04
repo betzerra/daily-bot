@@ -1,14 +1,8 @@
 require_relative 'telegram_step'
 
 class DollarStep < TelegramStep
-  def initialize(token, chat_id, payload)
-    @payload = payload
-    @token = token
-    @chat_id = chat_id
-  end
-
   def request_dollar
-    response = Faraday.get 'http://api.bluelytics.com.ar/v2/latest'
+    response = conn.get 'http://api.bluelytics.com.ar/v2/latest'
     JSON.parse(response.body)
   end
 

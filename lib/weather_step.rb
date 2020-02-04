@@ -1,19 +1,12 @@
 require_relative 'telegram_step'
 
 class WeatherStep < TelegramStep
-  def initialize(token, chat_id, openweather_token, payload)
-    @payload = payload
-    @token = token
-    @chat_id = chat_id
-    @openweather_token = openweather_token
-  end
-
   def request_weather
-    response = Faraday.get 'https://api.openweathermap.org/data/2.5/weather'\
-      "?lat=#{@payload['lat']}"\
-      "&lon=#{@payload['lon']}"\
+    response = conn.get 'https://api.openweathermap.org/data/2.5/weather'\
+      "?lat=#{payload['lat']}"\
+      "&lon=#{payload['lon']}"\
       '&units=metric'\
-      "&APPID=#{@openweather_token}"
+      "&APPID=#{payload['token']}"
     JSON.parse(response.body)
   end
 
