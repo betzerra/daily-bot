@@ -1,6 +1,4 @@
-require 'faraday'
-
-require './telegram_step'
+require_relative 'telegram_step'
 
 class DollarStep < TelegramStep
   def initialize(token, chat_id, payload)

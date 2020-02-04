@@ -13,6 +13,9 @@ script:
     tags:
       - morning
       - hello
+  - type: weather
+    lat: -34.6037
+    lon: -58.3816
 
 giphy:
   token: giphy_token

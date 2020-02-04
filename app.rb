@@ -3,10 +3,10 @@ require 'yaml'
 
 require 'telegram/bot'
 
-require './dollar_step'
-require './random_gif_step'
-require './random_message_step'
-require './weather_step'
+require_relative 'lib/dollar_step'
+require_relative 'lib/random_gif_step'
+require_relative 'lib/random_message_step'
+require_relative 'lib/weather_step'
 
 config = YAML.load_file('config.yml')
 

@@ -1,4 +1,5 @@
 require 'telegram/bot'
+require 'faraday'
 
 class TelegramStep
   def initialize(token, chat_id, payload)

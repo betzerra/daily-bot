@@ -1,6 +1,4 @@
-require 'faraday'
-
-require './telegram_step'
+require_relative 'telegram_step'
 
 class RandomGifStep < TelegramStep
   def initialize(token, chat_id, giphy_token, payload)

@@ -1,4 +1,4 @@
-require './telegram_step'
+require_relative 'telegram_step'
 
 class RandomMessageStep < TelegramStep
   def initialize(token, chat_id, payload)
