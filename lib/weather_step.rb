@@ -13,7 +13,8 @@ class WeatherStep < TelegramStep
   private
 
   def request_weather
-    response = conn.get "https://api.openweathermap.org/data/2.5/weather?q=#{city}&APPID=#{openweather_token}&units=metric"
+    response = conn.get 'https://api.openweathermap.org/data/2.5/weather'\
+                        "?q=#{city}&APPID=#{openweather_token}&units=metric"
     JSON.parse(response.body)
   end
 
@@ -22,7 +23,7 @@ class WeatherStep < TelegramStep
   end
 
   def openweather_token
-    payload['token']
+    configuration.openweather_token
   end
 
   def city

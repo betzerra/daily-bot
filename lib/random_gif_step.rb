@@ -3,13 +3,15 @@ require_relative 'telegram_step'
 class RandomGifStep < TelegramStep
   def handle_step
     gif = gif_message(random_giphy_tag)
+
     send_gif(gif)
   end
 
   private
 
   def gif_message(tag)
-    response = conn.get "https://api.giphy.com/v1/gifs/random\?api_key\=#{giphy_token}\&tag\=#{tag}"
+    response = conn.get 'https://api.giphy.com/v1/gifs/random'\
+                        "?api_key\=#{giphy_token}\&tag\=#{tag}"
     json = JSON.parse(response.body)
     json['data']['image_url']
   end
@@ -19,6 +21,6 @@ class RandomGifStep < TelegramStep
   end
 
   def giphy_token
-    payload['token']
+    configuration.giphy_token
   end
 end

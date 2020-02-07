@@ -10,10 +10,14 @@ script:
       - Cómo va, dude!? 🤖
   - type: dollar
   - type: random_gif
-    token: giphy_token
     tags:
       - morning
       - hello
   - type: weather
-    token: openweather_token
     city: Buenos Aires
+
+giphy:
+  token: giphy_token
+
+openweather:
+  token: openweather_token

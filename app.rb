@@ -1,11 +1,4 @@
-require 'yaml'
-require 'telegram/bot'
-
-require_relative 'lib/config'
-require_relative 'lib/dollar_step'
-require_relative 'lib/random_gif_step'
-require_relative 'lib/random_message_step'
-require_relative 'lib/weather_step'
+require_relative 'lib/daily_bot'
 
 STEP_CLASSES = {
   'dollar' => DollarStep,
@@ -14,21 +7,21 @@ STEP_CLASSES = {
   'weather' => WeatherStep
 }.freeze
 
-config = Config.new(YAML.load_file('config.yml'))
+config_hash = YAML.load_file('config.yml')
 
-@telegram_token = config.telegram_token
-@chat_id = config.telegram_chat_id
-
-def create_object(step_class, payload)
-  step_class.new(@telegram_token, @chat_id, payload)
+DailyBot.configure do |config|
+  config.telegram_token = config_hash['telegram']['token']
+  config.telegram_chat_id = config_hash['telegram']['chat_id']
+  config.giphy_token = config_hash['giphy']['token']
+  config.openweather_token = config_hash['openweather']['token']
 end
 
-steps = config.steps.map do |payload|
+steps = config_hash['script'].map do |payload|
   type = payload['type']
   step_class = STEP_CLASSES[type]
   raise "Class not defined for step #{type}" unless step_class
 
-  create_object(step_class, payload)
+  step_class.new(payload)
 end
 
 steps.each(&:handle_step)

@@ -2,9 +2,9 @@ require 'test_helper'
 
 class DollarStepTest < StepTest
   def test_handle_step
-    payload = config.steps.find { |step| step['type'] == 'dollar' }
+    payload = config['script'].find { |step| step['type'] == 'dollar' }
 
-    sut = DollarStep.new(telegram_token, chat_id, payload)
+    sut = DollarStep.new(payload)
 
     stubs = Faraday::Adapter::Test::Stubs.new
     stubs.get('/v2/latest') do

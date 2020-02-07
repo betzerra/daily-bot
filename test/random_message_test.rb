@@ -2,9 +2,9 @@ require 'test_helper'
 
 class RandomMessageStepTest < StepTest
   def test_handle_step
-    payload = config.steps.find { |step| step['type'] == 'random_message' }
+    payload = config['script'].find { |step| step['type'] == 'random_message' }
 
-    sut = RandomMessageStep.new(telegram_token, chat_id, payload)
+    sut = RandomMessageStep.new(payload)
 
     stubs = Faraday::Adapter::Test::Stubs.new
     stubs.get('/v1/gifs/random') do |req|

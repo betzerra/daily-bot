@@ -2,8 +2,8 @@ require 'test_helper'
 
 class WeatherStepTest < StepTest
   def test_handle_step
-    payload = config.steps.find { |step| step['type'] == 'weather' }
-    sut = WeatherStep.new(telegram_token, chat_id, payload)
+    payload = config['script'].find { |step| step['type'] == 'weather' }
+    sut = WeatherStep.new(payload)
 
     stubs = Faraday::Adapter::Test::Stubs.new
     stubs.get('data/2.5/weather') do |req|

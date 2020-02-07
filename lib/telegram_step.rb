@@ -4,14 +4,18 @@ require 'telegram/bot'
 class TelegramStep
   attr_writer :conn
 
-  def initialize(token, chat_id, payload)
-    @token = token
-    @chat_id = chat_id
+  def initialize(payload)
+    @token = configuration.telegram_token
+    @chat_id = configuration.telegram_chat_id
     @payload = payload
   end
 
   def conn
     @conn ||= Faraday.new
+  end
+
+  def configuration
+    @configuration ||= DailyBot.configuration
   end
 
   private

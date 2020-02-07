@@ -2,9 +2,9 @@ require 'test_helper'
 
 class RandomGifStepTest < StepTest
   def test_handle_step
-    payload = config.steps.find { |step| step['type'] == 'random_gif' }
+    payload = config['script'].find { |step| step['type'] == 'random_gif' }
 
-    sut = RandomGifStep.new(telegram_token, chat_id, payload)
+    sut = RandomGifStep.new(payload)
 
     stubs = Faraday::Adapter::Test::Stubs.new
     stubs.get('/v1/gifs/random') do |req|
