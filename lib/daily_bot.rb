@@ -1,4 +1,5 @@
 require 'yaml'
+require 'ostruct'
 
 require_relative 'dollar_step'
 require_relative 'random_gif_step'
@@ -11,17 +12,12 @@ module DailyBot
     attr_accessor :configuration
 
     def configure
-      self.configuration ||= Configuration.new
+      self.configuration ||= OpenStruct.new
       yield(configuration)
     end
 
     def reset
-      self.configuration = Configuration.new
+      self.configuration = OpenStruct.new
     end
-  end
-
-  class Configuration
-    attr_accessor :telegram_token, :telegram_chat_id, :giphy_token,
-                  :openweather_token
   end
 end
