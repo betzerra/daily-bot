@@ -3,7 +3,7 @@ require_relative 'weather_emoji'
 class WeatherEntry
   attr_accessor :min_temp, :max_temp, :temp, :feels_like, :emoji, :timestamp_begin, :timestamp_end
 
-  TEMPERATURE_THRESHOLD = 2.0
+  TEMPERATURE_THRESHOLD = 1.50
 
   def initialize(payload)
     @min_temp = payload['main']['temp_min']
