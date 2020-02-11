@@ -1,7 +1,11 @@
 require_relative 'telegram_step'
 require_relative 'weather_emoji'
+require_relative 'weather_entry'
 
 class WeatherForecastStep < TelegramStep
+
+  WEATHER_ITEMS = 4
+
   def handle_step
     text = forecast
     text << "MIN: #{forecast_min} MAX: #{forecast_max}"
@@ -19,24 +23,31 @@ class WeatherForecastStep < TelegramStep
   end
 
   def forecast
-    weather['list'].take(3).inject('') do |t, i|
-      t << "#{forecast_item(i)}\n"
+    entries = weather['list'].take(WEATHER_ITEMS).map { |i| WeatherEntry.new(i) }
+
+    sample = entries.first
+    new_entries = [sample]
+    entries.each do |i|
+      if sample.quite_similar?(i)
+        sample.merge(i)
+      else
+        sample = i
+        new_entries << i
+      end
+    end
+
+    new_entries.inject('') do |t, i|
+      t << "#{i.text}\n"
     end
   end
 
-  def forecast_item(entry)
-    time = Time.at(entry['dt']).strftime('%I%p')
-    "*#{time}* #{WeatherEmoji.call(entry['weather'].first['id'])} "\
-    "#{format_temp(entry['main']['temp'])}"
-  end
-
   def forecast_min
-    min = weather['list'].take(3).map { |i| i['main']['temp_min'] }.min
+    min = weather['list'].take(WEATHER_ITEMS).map { |i| i['main']['temp_min'] }.min
     format_temp(min)
   end
 
   def forecast_max
-    max = weather['list'].take(3).map { |i| i['main']['temp_max'] }.max
+    max = weather['list'].take(WEATHER_ITEMS).map { |i| i['main']['temp_max'] }.max
     format_temp(max)
   end
 
