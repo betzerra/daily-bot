@@ -4,7 +4,8 @@ STEP_CLASSES = {
   'dollar' => DollarStep,
   'random_gif' => RandomGifStep,
   'random_message' => RandomMessageStep,
-  'weather' => WeatherStep
+  'weather' => WeatherStep,
+  'weather_forecast' => WeatherForecastStep
 }.freeze
 
 config_hash = YAML.load_file('config.yml')

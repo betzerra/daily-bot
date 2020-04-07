@@ -5,6 +5,7 @@ require_relative 'dollar_step'
 require_relative 'random_gif_step'
 require_relative 'random_message_step'
 require_relative 'weather_step'
+require_relative 'weather_forecast_step'
 require_relative 'telegram_step'
 
 module DailyBot
