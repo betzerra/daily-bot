@@ -5,7 +5,8 @@ class DollarStep < TelegramStep
     text = "*Dolar oficial*: *#{oficial_sell}* / "\
       "*#{oficial_buy}* (spr: *#{spread_oficial}*)\n"\
       "*Dolar blue*: *#{blue_sell}* / "\
-      "*#{blue_buy}* (spr: *#{spread_blue}*)"
+      "*#{blue_buy}* (spr: *#{spread_blue}*)\n"\
+      "*Dif. blue / oficial:* #{diff_blue_oficial}%"
 
     send_message(text)
   end
@@ -51,5 +52,10 @@ class DollarStep < TelegramStep
 
   def blue_buy
     blue['value_buy']
+  end
+
+  def diff_blue_oficial
+    result = (blue_buy * 100 / oficial_buy).round(2) - 100
+    result.positive? ? "⬆️ #{result}" : "⬇️ #{result}"
   end
 end
