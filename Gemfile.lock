@@ -14,7 +14,10 @@ GEM
       multipart-post (>= 1.2, < 3)
     ice_nine (0.11.2)
     inflecto (0.0.2)
+    mini_portile2 (2.4.0)
     multipart-post (2.1.1)
+    nokogiri (1.10.9)
+      mini_portile2 (~> 2.4.0)
     telegram-bot-ruby (0.11.0)
       faraday
       inflecto
@@ -31,6 +34,7 @@ PLATFORMS
 
 DEPENDENCIES
   faraday
+  nokogiri
   telegram-bot-ruby
 
 RUBY VERSION

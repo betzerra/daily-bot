@@ -1,6 +1,7 @@
 require_relative 'lib/daily_bot'
 
 STEP_CLASSES = {
+  'covid' => CovidStep,
   'dollar' => DollarStep,
   'random_gif' => RandomGifStep,
   'random_message' => RandomMessageStep,
