@@ -1,6 +1,5 @@
 require_relative 'telegram_step'
 require 'nokogiri'
-require 'pry'
 
 class CovidStep < TelegramStep
   def handle_step
