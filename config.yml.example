@@ -15,6 +15,9 @@ script:
       - hello
   - type: weather
     city: Buenos Aires
+  - type: weather_forecast
+    lat: -34.586217
+    lon: -58.477769
   - type: covid
     country: argentina
 
