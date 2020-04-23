@@ -55,7 +55,8 @@ class DollarStep < TelegramStep
   end
 
   def diff_blue_oficial
-    result = (blue_buy * 100 / oficial_buy).round(2) - 100
+    result = (blue_buy * 100 / oficial_buy) - 100
+    result = result.round(2)
     result.positive? ? "⬆️ #{result}" : "⬇️ #{result}"
   end
 end
