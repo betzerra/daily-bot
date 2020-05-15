@@ -37,26 +37,26 @@ class CovidStep < TelegramStep
   end
 
   def total_cases
-    country.css('td')[1].text.tr(',', '.')
+    country.css('td')[2].text.tr(',', '.')
   end
 
   def deaths
-    country.css('td')[3].text.tr(',', '.')
+    country.css('td')[4].text.tr(',', '.')
   end
 
   def recovered
-    country.css('td')[5].text.tr(',', '.')
-  end
-
-  def active
     country.css('td')[6].text.tr(',', '.')
   end
 
-  def serious
+  def active
     country.css('td')[7].text.tr(',', '.')
   end
 
+  def serious
+    country.css('td')[8].text.tr(',', '.')
+  end
+
   def total_tests
-    country.css('td')[10].text.tr(',', '.')
+    country.css('td')[11].text.tr(',', '.')
   end
 end
