@@ -14,7 +14,7 @@ class DollarStep < TelegramStep
   private
 
   def request_dollar
-    response = conn.get 'http://api.bluelytics.com.ar/v2/latest'
+    response = conn.get 'https://api.bluelytics.com.ar/v2/latest'
     JSON.parse(response.body)
   end
 

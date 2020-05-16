@@ -1,4 +1,5 @@
 require 'faraday'
+require 'faraday_middleware'
 require 'telegram/bot'
 
 class TelegramStep
@@ -11,7 +12,9 @@ class TelegramStep
   end
 
   def conn
-    @conn ||= Faraday.new
+    @conn ||= Faraday.new do |f|
+      f.use FaradayMiddleware::FollowRedirects
+    end
   end
 
   def configuration
