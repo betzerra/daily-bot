@@ -4,11 +4,9 @@ require 'nokogiri'
 class CovidStep < TelegramStep
   def handle_step
     text = "*Reporte de COVID-19 en #{payload['country'].capitalize} 🦠*\n"\
-      "- Contagiados: #{total_cases}\n"\
-      "- Muertos: #{deaths}\n"\
-      "- Recuperados: #{recovered}\n"\
-      "- Activos: #{active}\n"\
-      "- En grave estado: #{serious}\n"\
+      "- Contagiados: #{total_cases} (#{daily_cases})\n"\
+      "- Ranking Contagiados: \##{ranking}\n"\
+      "- Muertos: #{deaths} (#{daily_deaths})\n"\
       "- Testeados: #{total_tests}\n"
 
     send_message(text)
@@ -40,23 +38,23 @@ class CovidStep < TelegramStep
     country.css('td')[2].text.tr(',', '.')
   end
 
+  def daily_cases
+    country.css('td')[3].text.tr(',', '.')
+  end
+
   def deaths
     country.css('td')[4].text.tr(',', '.')
   end
 
-  def recovered
-    country.css('td')[6].text.tr(',', '.')
-  end
-
-  def active
-    country.css('td')[7].text.tr(',', '.')
-  end
-
-  def serious
-    country.css('td')[8].text.tr(',', '.')
+  def daily_deaths
+    country.css('td')[5].text.tr(',', '.')
   end
 
   def total_tests
-    country.css('td')[11].text.tr(',', '.')
+    country.css('td')[12].text.tr(',', '.')
+  end
+
+  def ranking
+    country.css('td')[0].text.tr(',', '.')
   end
 end
