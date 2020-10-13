@@ -29,7 +29,8 @@ class DollarStepTest < StepTest
     end
 
     expected = "*Dolar oficial*: *63.05* / *58.05* (spr: *5.0*)\n"\
-               '*Dolar blue*: *78* / *75.27* (spr: *2.73*)'
+               "*Dolar blue*: *78* / *75.27* (spr: *2.73*)\n"\
+               '*Dif. blue / oficial:* ⬆️ 29.66%'
 
     sut.stub :send_message, ->(message) { assert_equal expected, message } do
       sut.handle_step
