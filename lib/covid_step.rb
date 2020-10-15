@@ -3,10 +3,13 @@ require 'nokogiri'
 
 class CovidStep < TelegramStep
   def handle_step
+    new_cases = daily_cases.nil? ? "" : "(#{daily_cases})"
+    new_deaths = daily_deaths.nil? ? "" : "(#{daily_deaths})"
+
     text = "*Reporte de COVID-19 en #{payload['country'].capitalize} 🦠*\n"\
-      "- Contagiados: #{total_cases} (#{daily_cases})\n"\
+      "- Contagiados: #{total_cases} #{new_cases}\n"\
       "- Ranking Contagiados: \##{ranking}\n"\
-      "- Muertos: #{deaths} (#{daily_deaths})\n"\
+      "- Muertos: #{deaths} #{new_deaths}\n"\
       "- Testeados: #{total_tests}\n"
 
     send_message(text)
