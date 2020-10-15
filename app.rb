@@ -9,7 +9,9 @@ STEP_CLASSES = {
   'weather_forecast' => WeatherForecastStep
 }.freeze
 
-config_hash = YAML.load_file('config.yml')
+config_filename = ARGV.first || 'config.yml'
+
+config_hash = YAML.load_file(config_filename)
 
 DailyBot.configure do |config|
   config.telegram_token = config_hash['telegram']['token']
