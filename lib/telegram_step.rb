@@ -30,7 +30,8 @@ class TelegramStep
       bot.api.send_message(
         chat_id: chat_id,
         text: text,
-        parse_mode: 'markdown'
+        parse_mode: 'markdown',
+        disable_web_page_preview: true
       )
     end
   end

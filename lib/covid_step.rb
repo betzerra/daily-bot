@@ -2,20 +2,25 @@ require_relative 'telegram_step'
 require 'nokogiri'
 
 class CovidStep < TelegramStep
+  BASE_URL = 'https://www.worldometers.info/coronavirus/'
+
   def handle_step
+    new_cases = daily_cases.strip.empty? ? '' : "(#{daily_cases})"
+    new_deaths = daily_deaths.strip.empty? ? '' : "(#{daily_deaths})"
+
     text = "*Reporte de COVID-19 en #{payload['country'].capitalize} 🦠*\n"\
-      "- Contagiados: #{total_cases} (#{daily_cases})\n"\
+      "- Contagiados: #{total_cases} #{new_cases}\n"\
       "- Ranking Contagiados: \##{ranking}\n"\
-      "- Muertos: #{deaths} (#{daily_deaths})\n"\
-      "- Testeados: #{total_tests}\n"
+      "- Muertos: #{deaths} #{new_deaths}\n"\
+      "- Testeados: #{total_tests}\n\n"\
+      "[Fuente](#{BASE_URL})"
 
     send_message(text)
   end
 
-  private
-
+  private 
   def request_covid_data
-    response = conn.get 'https://www.worldometers.info/coronavirus/'
+    response = conn.get BASE_URL
     Nokogiri::HTML(response.body)
   end
 
