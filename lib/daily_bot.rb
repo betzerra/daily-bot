@@ -8,6 +8,8 @@ require_relative 'random_message_step'
 require_relative 'weather_step'
 require_relative 'weather_forecast_step'
 require_relative 'telegram_step'
+require_relative 'vaccines_entry'
+require_relative 'vaccines_step'
 
 module DailyBot
   class << self

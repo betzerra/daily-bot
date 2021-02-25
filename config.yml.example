@@ -20,6 +20,7 @@ script:
     lon: -58.477769
   - type: covid
     country: argentina
+  - type: vaccines
 
 giphy:
   token: giphy_token

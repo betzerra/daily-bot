@@ -1,0 +1,32 @@
+{
+	"6": {
+		"denominacion": "Buenos Aires",
+		"poblacion": 17541141,
+		"fechas": [{
+			"fecha": "2021-01-19T00:00:00-03:00",
+			"tipovacuna": "Sputnik V COVID19 Instituto Gamaleya",
+			"primeradosis": 93507,
+			"segundadosis": 77
+		}, {
+			"fecha": "2021-01-20T00:00:00-03:00",
+			"tipovacuna": "Sputnik V COVID19 Instituto Gamaleya",
+			"primeradosis": 2570,
+			"segundadosis": 83
+		}]
+	},
+	"2": {
+		"denominacion": "CABA",
+		"poblacion": 3075646,
+		"fechas": [{
+			"fecha": "2021-01-19T00:00:00-03:00",
+			"tipovacuna": "Sputnik V COVID19 Instituto Gamaleya",
+			"primeradosis": 23372,
+			"segundadosis": 661
+		}, {
+			"fecha": "2021-01-20T00:00:00-03:00",
+			"tipovacuna": "Sputnik V COVID19 Instituto Gamaleya",
+			"primeradosis": 256,
+			"segundadosis": 578
+		}]
+	}
+}
