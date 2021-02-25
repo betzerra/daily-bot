@@ -40,7 +40,7 @@ class VaccinesStepTest < StepTest
       builder.adapter :test, stubs
     end
 
-    expected = "*Vacunaciones contra COVID-19 en Argentina* \n"
+    expected = "*Vacunaciones contra COVID-19 en Argentina* \n"\
                "*- Primera dosis*: 116879 \n"\
                "*- Segunda dosis*: 738 \n\n"\
                '[Fuente](https://covidstats.com.ar/vacunados)'
