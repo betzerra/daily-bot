@@ -41,7 +41,7 @@ class VaccinesStepTest < StepTest
     end
 
     expected = "*Vacunaciones contra COVID-19 en Argentina* 💉 \n"\
-               "*- Primera dosis*: 116879 \n"\
+               "*- Primera dosis*: 116.879 \n"\
                "*- Segunda dosis*: 738 \n\n"\
                '[Fuente](https://covidstats.com.ar/vacunados)'
 
