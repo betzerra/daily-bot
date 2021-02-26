@@ -43,8 +43,8 @@ class VaccinesStepTest < StepTest
     expected = "*Vacunaciones contra COVID-19 en Argentina* 💉 \n"\
                "*- Primera dosis*: 116.879 (+116.879)\n"\
                "*- Segunda dosis*: 738 (+738)\n\n"\
-               "[Fuente](https://covidstats.com.ar/vacunados) \n"\
-               "Última actualización: 19-01-2021"
+               "*Última actualización:* 19-01-2021 "\
+               "[Fuente](https://covidstats.com.ar/vacunados)"
 
     sut.stub :send_message, ->(message) { assert_equal expected, message } do
       sut.handle_step
