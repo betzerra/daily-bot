@@ -45,4 +45,8 @@ class TelegramStep
       )
     end
   end
+
+  def thousand_format(number)
+    number.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse
+  end
 end

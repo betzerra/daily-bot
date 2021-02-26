@@ -5,8 +5,8 @@ class VaccinesStep < TelegramStep
   
     def handle_step
         text = "*Vacunaciones contra COVID-19 en Argentina* 💉 \n"\
-            "*- Primera dosis*: #{vaccines.sum_first_doses} \n"\
-            "*- Segunda dosis*: #{vaccines.sum_second_doses} \n\n"\
+            "*- Primera dosis*: #{thousand_format(vaccines.sum_first_doses)} \n"\
+            "*- Segunda dosis*: #{thousand_format(vaccines.sum_second_doses)} \n\n"\
             "[Fuente](https://covidstats.com.ar/vacunados)"
 
         send_message(text)
