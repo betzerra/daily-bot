@@ -9,8 +9,8 @@ class VaccinesStep < TelegramStep
             "#{today_doses(vaccines.sum_today_first_doses)}\n"\
             "*- Segunda dosis*: #{thousand_format(vaccines.sum_second_doses)} "\
             "#{today_doses(vaccines.sum_today_second_doses)}\n\n"\
-            "[Fuente](https://covidstats.com.ar/vacunados) \n"\
-            "Última actualización: #{last_day}"
+            "*Última actualización:* #{last_day} "\
+            "[Fuente](https://covidstats.com.ar/vacunados)"
 
         send_message(text)
     end
