@@ -2,22 +2,42 @@ require 'date'
 require "time"
 
 class VaccinesEntry
-    attr_accessor :sum_first_doses, :sum_second_doses, :sum_today_first_doses, :sum_today_second_doses, :last_day
+    attr_accessor :first_doses_total, :second_doses_total, :first_doses_last, :second_doses_last, :last_day, :daily_logs
 
     def initialize(payload)
         entries = payload.flat_map { |i| i[1]["fechas"] }
-        @last_day = Time.parse(entries.last['fecha']).to_date
+        @last_day = Time.parse(entries.last['fecha']).to_date.to_s
 
-        @sum_first_doses = entries.reduce(0) { |sum, i| sum + i["primeradosis"] }
-        @sum_second_doses = entries.reduce(0) { |sum, i| sum + i["segundadosis"] }
+        days = entries.map { |i| i['fecha'] }.uniq
 
-        @sum_today_first_doses = entries
-                                    .filter { |i| VaccinesEntry.is_entry_date_same_day(i['fecha'], @last_day) }
-                                    .reduce(0) { |sum, i| sum + i["primeradosis"] }
+        @daily_logs = days.map { |day|
+            entries_day = entries
+                .filter { |i| i['fecha'] == day }
 
-        @sum_today_second_doses = entries
-                                    .filter { |i| VaccinesEntry.is_entry_date_same_day(i['fecha'], @last_day) }
-                                    .reduce(0) { |sum, i| sum + i["segundadosis"] }
+            day_value = {
+                first_doses: entries_day.reduce(0) { |sum, i| sum + i["primeradosis"] }, 
+                second_doses: entries_day.reduce(0) { |sum, i| sum + i["segundadosis"] }
+            }
+
+            day_key = Time.parse(day).to_date.to_s
+            [day_key, day_value]
+        }.to_h
+    end
+
+    def first_doses_total
+        @daily_logs.values.reduce(0) { |sum, i| sum + i[:first_doses] }
+    end
+
+    def second_doses_total
+        @daily_logs.values.reduce(0) { |sum, i| sum + i[:second_doses] }
+    end
+
+    def first_doses_last
+        @daily_logs[last_day][:first_doses]
+    end
+
+    def second_doses_last
+        @daily_logs[last_day][:second_doses]
     end
 
     private

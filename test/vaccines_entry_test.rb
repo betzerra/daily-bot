@@ -16,8 +16,14 @@ class VaccinesEntryTest < Minitest::Test
 
   def test_entry
     entry = VaccinesEntry.new(payload)
-    assert_equal 119705, entry.sum_first_doses
-    assert_equal 1399, entry.sum_second_doses
+    
+    # total
+    assert_equal 119705, entry.first_doses_total
+    assert_equal 1399, entry.second_doses_total
+    
+    # last entries
+    assert_equal 2826, entry.first_doses_last
+    assert_equal 661, entry.second_doses_last
   end
 
   def test_date_parsing
