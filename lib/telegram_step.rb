@@ -47,7 +47,7 @@ class TelegramStep
   end
 
   def send_image(path, caption)
-    # TODO: Use image/jpeg when the path extension ends in jpg/jpeg
+    # TODO: Support more image MIME types
 
     Telegram::Bot::Client.run(token) do |bot|
       bot.api.send_photo(
