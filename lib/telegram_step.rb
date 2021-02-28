@@ -46,6 +46,18 @@ class TelegramStep
     end
   end
 
+  def send_image(path, caption)
+    # TODO: Use image/jpeg when the path extension ends in jpg/jpeg
+
+    Telegram::Bot::Client.run(token) do |bot|
+      bot.api.send_photo(
+        chat_id: chat_id,
+        photo: Faraday::UploadIO.new(path, 'image/jpeg'),
+        caption: caption
+      )
+    end
+  end
+
   def thousand_format(number)
     number.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse
   end
