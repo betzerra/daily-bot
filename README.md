@@ -5,10 +5,10 @@
 1. Edit `config.yml` ([see "Config File"](#config-file))
 1. `bundle install`
 
-# Installing RMagick
+## Installing RMagick
 This is needed for the `vaccines_step` when generating the graphs.
 
-## Raspbian
+### Raspbian
 ```
 sudo apt-get update
 sudo apt-get install libmagickcore-dev libmagickwand-dev
