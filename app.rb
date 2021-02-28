@@ -6,6 +6,7 @@ STEP_CLASSES = {
   'random_gif' => RandomGifStep,
   'random_message' => RandomMessageStep,
   'vaccines' => VaccinesStep,
+  'vaccines_graph' => VaccinesGraphStep,
   'weather' => WeatherStep,
   'weather_forecast' => WeatherForecastStep
 }.freeze
