@@ -5,11 +5,11 @@ class VaccinesStep < TelegramStep
   
     def handle_step
         text = "*Vacunaciones contra COVID-19 en Argentina* 💉 \n"\
-            "*- Primera dosis*: #{thousand_format(vaccines.sum_first_doses)} "\
-            "#{today_doses(vaccines.sum_today_first_doses)}\n"\
-            "*- Segunda dosis*: #{thousand_format(vaccines.sum_second_doses)} "\
-            "#{today_doses(vaccines.sum_today_second_doses)}\n\n"\
-            "*Última actualización:* #{last_day} "\
+            "*- Primera dosis*: #{thousand_format(vaccines.first_doses_total)} "\
+            "#{today_doses(vaccines.first_doses_last)}\n"\
+            "*- Segunda dosis*: #{thousand_format(vaccines.second_doses_total)} "\
+            "#{today_doses(vaccines.second_doses_last)}\n\n"\
+            "*Última actualización:* #{vaccines.last_day} \n"\
             "[Fuente](https://covidstats.com.ar/vacunados)"
 
         send_message(text)
@@ -22,10 +22,6 @@ class VaccinesStep < TelegramStep
 
     def vaccines
         @vaccines ||= VaccinesEntry.new(request_vaccines)
-    end
-
-    def last_day
-        vaccines.last_day.strftime('%d-%m-%Y')
     end
 
     def today_doses(number)
