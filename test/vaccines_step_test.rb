@@ -44,10 +44,12 @@ class VaccinesStepTest < StepTest
                "*- Primera dosis*: 116.879 (+116.879)\n"\
                "*- Segunda dosis*: 738 (+738)\n\n"\
                "*Última actualización:* 2021-01-19 \n"\
-               "[Fuente](https://covidstats.com.ar/vacunados)"
+               '[Fuente](https://covidstats.com.ar/vacunados)'
 
-    sut.stub :send_message, ->(message) { assert_equal expected, message } do
-      sut.handle_step
+    sut.stub :send_photo, ->(_, _) {} do
+      sut.stub :send_message, ->(message) { assert_equal expected, message } do
+        sut.handle_step
+      end
     end
   end
 end

@@ -21,6 +21,8 @@ script:
   - type: covid
     country: argentina
   - type: vaccines
+    text_summary_enabled: true
+    graph_period_days: 14
 
 giphy:
   token: giphy_token

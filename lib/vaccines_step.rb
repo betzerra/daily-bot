@@ -4,52 +4,61 @@ require_relative 'telegram_step'
 require_relative 'vaccines_entry'
 
 class VaccinesStep < TelegramStep
-  
-    GRAPH_FILENAME = 'vaccines_graph.jpg'
+  GRAPH_FILENAME = 'vaccines_graph.jpg'
 
-    def handle_step
-        text = "*Vacunaciones contra COVID-19 en Argentina* 💉 \n"\
-            "*- Primera dosis*: #{thousand_format(vaccines.first_doses_total)} "\
-            "#{today_doses(vaccines.first_doses_last)}\n"\
-            "*- Segunda dosis*: #{thousand_format(vaccines.second_doses_total)} "\
-            "#{today_doses(vaccines.second_doses_last)}\n\n"\
-            "*Última actualización:* #{vaccines.last_day} \n"\
-            "[Fuente](https://covidstats.com.ar/vacunados)"
+  def handle_step
+    if text_summary_enabled
+      text = "*Vacunaciones contra COVID-19 en Argentina* 💉 \n"\
+        "*- Primera dosis*: #{thousand_format(vaccines.first_doses_total)} "\
+        "#{today_doses(vaccines.first_doses_last)}\n"\
+        "*- Segunda dosis*: #{thousand_format(vaccines.second_doses_total)} "\
+        "#{today_doses(vaccines.second_doses_last)}\n\n"\
+        "*Última actualización:* #{vaccines.last_day} \n"\
+        '[Fuente](https://covidstats.com.ar/vacunados)'
 
-        send_message(text)
-
-        send_graph
+      send_message(text)
     end
 
-    def request_vaccines
-        response = conn.get 'https://covidstats.com.ar/ws/vacunados'
-        JSON.parse(response.body)
-    end
+    send_graph
+  end
 
-    def vaccines
-        @vaccines ||= VaccinesEntry.new(request_vaccines)
-    end
+  def request_vaccines
+    response = conn.get 'https://covidstats.com.ar/ws/vacunados'
+    JSON.parse(response.body)
+  end
 
-    def today_doses(number)
-        return if number.zero?
+  def vaccines
+    @vaccines ||= VaccinesEntry.new(request_vaccines)
+  end
 
-        "(+#{thousand_format(number)})"
-    end
+  def today_doses(number)
+    return if number.zero?
 
-    private
+    "(+#{thousand_format(number)})"
+  end
 
-    def send_graph
-        # get only last 2 weeks
-        data = vaccines.daily_logs.to_a.last(14).to_h
-        title = "Vacunaciones: #{data.keys.first} a #{data.keys.last}"
+  private
 
-        g = Gruff::Line.new
+  def send_graph
+    # get only last 2 weeks
+    data = vaccines.daily_logs.to_a.last(graph_period_days).to_h
+    title = "Vacunaciones: #{data.keys.first} a #{data.keys.last}"
 
-        g.title = title
-        g.data '1 Dosis', data.map { |_, v| v[:first_doses] }
-        g.data '2 Dosis', data.map { |_, v| v[:second_doses] }
+    g = Gruff::Line.new
 
-        g.write(GRAPH_FILENAME)
-        send_image(GRAPH_FILENAME, title)
-    end
+    g.title = title
+    g.data '1 Dosis', (data.map { |_, v| v[:first_doses] })
+    g.data '2 Dosis', (data.map { |_, v| v[:second_doses] })
+
+    g.write(GRAPH_FILENAME)
+    send_photo(GRAPH_FILENAME, title)
+  end
+
+  def graph_period_days
+    payload['graph_period_days']
+  end
+
+  def text_summary_enabled
+    payload['text_summary_enabled']
+  end
 end
