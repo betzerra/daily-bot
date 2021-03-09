@@ -76,6 +76,8 @@ giphy:
 #### vaccines
 ```
 - type: vaccines
+  text_summary_enabled: true
+  graph_period_days: 14
 ```
 `vaccines` posts a COVID-19 vaccine daily stats from Argentina.
 
