@@ -46,7 +46,7 @@ class TelegramStep
     end
   end
 
-  def send_image(path, caption)
+  def send_photo(path, caption)
     # TODO: Support more image MIME types
 
     Telegram::Bot::Client.run(token) do |bot|
