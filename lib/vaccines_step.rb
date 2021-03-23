@@ -50,19 +50,22 @@ class VaccinesStep < TelegramStep
     g.data '1 Dosis', (data.map { |_, v| v[:first_doses] })
     g.data '2 Dosis', (data.map { |_, v| v[:second_doses] })
 
-    if graph_labels_enabled
-      g.labels = data
-                 .keys
-                 .map
-                 .with_index do |key, i|
-                   short_date = Date.strptime(key, '%Y-%m-%d').strftime('%m-%d')
-                   [i, short_date]
-                 end
-                 .to_h
-    end
+    g.marker_font_size = 18
+    g.labels = data
+                .keys
+                .map
+                .with_index do |key, i|
+                  label = (i % graph_labels_interval).zero? ? short_date(key) : ''
+                  [i, label]
+                end
+                .to_h
 
     g.write(GRAPH_FILENAME)
     send_photo(GRAPH_FILENAME, title)
+  end
+
+  def short_date(value)
+    Date.strptime(value, '%Y-%m-%d').strftime('%m-%d')
   end
 
   def graph_period_days
@@ -73,7 +76,7 @@ class VaccinesStep < TelegramStep
     payload['text_summary_enabled']
   end
 
-  def graph_labels_enabled
-    payload['graph_labels_enabled']
+  def graph_labels_interval
+    payload['graph_labels_interval'] || 1
   end
 end
