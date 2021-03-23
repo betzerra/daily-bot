@@ -22,6 +22,7 @@ script:
     country: argentina
   - type: vaccines
     text_summary_enabled: true
+    graph_labels_enabled: false
     graph_period_days: 14
 
 giphy:
