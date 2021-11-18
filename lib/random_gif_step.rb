@@ -13,7 +13,7 @@ class RandomGifStep < TelegramStep
     response = conn.get 'https://api.giphy.com/v1/gifs/random'\
                         "?api_key\=#{giphy_token}\&tag\=#{tag}"
     json = JSON.parse(response.body)
-    json['data']['image_url']
+    json['data']['images']['original']['mp4']
   end
 
   def random_giphy_tag
