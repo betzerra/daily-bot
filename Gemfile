@@ -8,4 +8,5 @@ gem 'telegram-bot-ruby'
 
 group :test do
   gem 'json'
+  gem 'minitest'
 end
