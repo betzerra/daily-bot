@@ -10,11 +10,20 @@ class RandomGifStepTest < StepTest
     stubs.get('/v1/gifs/random') do |req|
       assert_equal 'giphy_token', req.params['api_key']
       assert_includes %w[morning hello], req.params['tag']
-
       [
         200,
         { 'Content-Type': 'application/javascript' },
-        '{"data":{"image_url":"http://foo.gif"}}'
+        '''
+        {
+          "data": {
+            "images": {
+              "original": {
+                "mp4": "http://foo.gif"
+              }
+            }
+          }
+        }
+        '''
       ]
     end
 
