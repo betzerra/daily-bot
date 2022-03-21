@@ -4,6 +4,6 @@ class RandomMessageStep < TelegramStep
   def handle_step
     text = payload['messages'].sample
 
-    send_message(text)
+    send_message(text, disable_notification)
   end
 end

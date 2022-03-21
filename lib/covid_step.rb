@@ -15,10 +15,10 @@ class CovidStep < TelegramStep
       "- Testeados: #{total_tests}\n\n"\
       "[Fuente](#{BASE_URL})"
 
-    send_message(text)
+    send_message(text, disable_notification)
   end
 
-  private 
+  private
   def request_covid_data
     response = conn.get BASE_URL
     Nokogiri::HTML(response.body)

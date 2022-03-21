@@ -16,7 +16,7 @@ class VaccinesStep < TelegramStep
         "*Última actualización:* #{vaccines.last_day} \n"\
         '[Fuente](https://covidstats.com.ar/vacunados)'
 
-      send_message(text)
+      send_message(text, disable_notification)
     end
 
     send_graph

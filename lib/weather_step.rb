@@ -7,7 +7,7 @@ class WeatherStep < TelegramStep
       "MIN: #{temp_min} MAX: #{temp_max}\n"\
       "Humedad: #{humidity}%"
 
-    send_message(text)
+    send_message(text, disable_notification)
   end
 
   private
