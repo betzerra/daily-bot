@@ -10,7 +10,7 @@ class WeatherForecastStep < TelegramStep
     text = forecast
     text << "MIN: #{forecast_min} MAX: #{forecast_max}"
 
-    send_message(text)
+    send_message(text, disable_notification)
   end
 
   private

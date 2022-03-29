@@ -22,7 +22,7 @@ class RandomMessageStepTest < StepTest
       builder.adapter :test, stubs
     end
 
-    message_info = ->(message) { assert_includes payload['messages'], message }
+    message_info = ->(message, _) { assert_includes payload['messages'], message }
 
     sut.stub :send_message, message_info, nil do
       sut.handle_step

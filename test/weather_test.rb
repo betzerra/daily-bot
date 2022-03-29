@@ -24,7 +24,7 @@ class WeatherStepTest < StepTest
     expected = "*T:* 33.13ºC 🌤 (ST: 34.72ºC)\nMIN: 32ºC MAX: 35ºC\n"\
       'Humedad: 55%'
 
-    message_info = ->(message) { assert_equal expected, message }
+    message_info = ->(message, _) { assert_equal expected, message }
 
     sut.stub :send_message, message_info, nil do
       sut.handle_step

@@ -18,7 +18,7 @@ class DollarStep < TelegramStep
       "*ETH-USD*: *#{coinbase_eth_usd}* (Coinbase) "\
       "*#{ripio_eth_usdc}* (Ripio)"
 
-    send_message(text)
+    send_message(text, disable_notification)
   end
 
   private
@@ -91,7 +91,7 @@ class DollarStep < TelegramStep
   def ripio_btc_usdc
     @ripio_btc_usdc ||= Float(ripio_pair("BTC_USDC")['last_price']) \
       rescue "unknown"
-  end 
+  end
 
   def ripio_btc_ars
     @ripio_btc_ars ||= Float(ripio_pair("BTC_ARS")['last_price']) \
@@ -105,7 +105,7 @@ class DollarStep < TelegramStep
   def ripio_eth_usdc
     @ripio_eth_usdc ||= Float(ripio_pair("ETH_USDC")['last_price']) \
       rescue "unknown"
-  end 
+  end
 
   def crypto_buy
     ((ripio_btc_ars / ripio_btc_usdc) * (0.99) ** 2) \

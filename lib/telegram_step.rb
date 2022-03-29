@@ -21,27 +21,32 @@ class TelegramStep
     @configuration ||= DailyBot.configuration
   end
 
+  def disable_notification
+    @payload['disable_notification'] || false
+  end
+
   private
 
   attr_reader :token, :chat_id, :payload
 
-  def send_message(text)
+  def send_message(text, disable_notification = false)
     Telegram::Bot::Client.run(token) do |bot|
       bot.api.send_message(
         chat_id: chat_id,
         text: text,
         parse_mode: 'markdown',
-        disable_web_page_preview: true
+        disable_web_page_preview: true,
+        disable_notification: disable_notification
       )
     end
   end
 
-  def send_gif(url)
+  def send_gif(url, disable_notification = false)
     Telegram::Bot::Client.run(token) do |bot|
       bot.api.send_animation(
         chat_id: chat_id,
         animation: url,
-        disable_notification: true
+        disable_notification: disable_notification
       )
     end
   end
