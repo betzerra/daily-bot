@@ -47,7 +47,7 @@ class VaccinesStepTest < StepTest
                '[Fuente](https://covidstats.com.ar/vacunados)'
 
     sut.stub :send_photo, ->(_, _) {} do
-      sut.stub :send_message, ->(message) { assert_equal expected, message } do
+      sut.stub :send_message, ->(message, _) { assert_equal expected, message } do
         sut.handle_step
       end
     end

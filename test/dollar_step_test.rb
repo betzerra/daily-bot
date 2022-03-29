@@ -27,9 +27,9 @@ class DollarStepTest < StepTest
         { 'Content-Type': 'application/javascript' },
         '[
           {"pair":"BTC_USDC", "last_price":"54321.00"},
-          {"pair":"ETH_USDC", "last_price":"12345.00"}, 
+          {"pair":"ETH_USDC", "last_price":"12345.00"},
           {"pair":"BTC_ARS", "last_price":"123456789.00"}
-        ]'  
+        ]'
       ]
     end
   end
@@ -70,7 +70,7 @@ class DollarStepTest < StepTest
                "*BTC-USD*: *54320.12* (Coinbase) *54321.0* (Ripio)\n"\
                '*ETH-USD*: *12346.17* (Coinbase) *12345.0* (Ripio)'
 
-    sut.stub :send_message, ->(message) { assert_equal expected, message } do
+    sut.stub :send_message, ->(message, _) { assert_equal expected, message } do
       sut.handle_step
     end
   end
@@ -106,7 +106,7 @@ class DollarStepTest < StepTest
                "*BTC-USD*: *unknown* (Coinbase) *unknown* (Ripio)\n"\
                '*ETH-USD*: *unknown* (Coinbase) *unknown* (Ripio)'
 
-    sut.stub :send_message, ->(message) { assert_equal expected, message } do
+    sut.stub :send_message, ->(message, _) { assert_equal expected, message } do
       sut.handle_step
     end
   end
