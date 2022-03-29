@@ -5,6 +5,6 @@ class SquanchyMessageStep < TelegramStep
     response = conn.get 'https://squanchy.dokku.betzerra.dev/posts/random'
     json = JSON.parse(response.body)
 
-    send_message(json['content'])
+    send_message(json['content'], disable_notification)
   end
 end

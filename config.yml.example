@@ -3,6 +3,7 @@ telegram:
   chat_id: chat_id
 
 script:
+  - type: squanchy
   - type: random_message
     messages:
       - Buen día, Betz 👋🏽
