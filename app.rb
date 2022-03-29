@@ -5,6 +5,7 @@ STEP_CLASSES = {
   'dollar' => DollarStep,
   'random_gif' => RandomGifStep,
   'random_message' => RandomMessageStep,
+  'squanchy_message' => SquanchyMessageStep,
   'vaccines' => VaccinesStep,
   'weather' => WeatherStep,
   'weather_forecast' => WeatherForecastStep
