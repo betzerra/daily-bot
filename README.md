@@ -31,22 +31,30 @@ telegram:
 - `chat_id` whom is the bot going to message. See: ["How to get a group chat id?"](https://stackoverflow.com/a/32572159)
 
 ### Script
+
+#### clarinete news
+Gets trending news from this [URL](https://clarinete.seppo.com.ar/api/trends).
+```
+- type: clarinete_news
+```
+
 #### covid
+Shows a summary with daily increments about COVID-19 cases. 
 ```
 - type: covid
   country: argentina
 ```
-`covid` shows a summary with daily increments about COVID-19 cases. 
 
 :warning: __You have to specify the country.__
 
 #### dollar
+Shows the dollar (blue and oficial) exchange rate in Argentina 💸
 ```
 - type: dollar
 ```
-`dollar` shows the dollar (blue and oficial) exchange rate in Argentina 💸
 
 #### random_message
+Posts one random message
 ```
 - type: random_message
   messages:
@@ -54,10 +62,9 @@ telegram:
     - random message 2
     - random message 3
 ```
-`random_message` posts one random message 
 
 #### random_gif
-`random_gif` will post a gif that contains one tag from the ones you specify.
+Posts a gif that contains one tag from the ones you specify.
 
 ```
 script:
@@ -73,15 +80,22 @@ giphy:
 
 [Get an API Token](https://developers.giphy.com).
 
+#### Squanchy (Random Quotes from an API)
+Fetches random quote from this [URL](https://squanchy.dokku.betzerra.dev/posts/random)
+```
+- type: squanchy
+```
+
 #### vaccines
+Posts a COVID-19 vaccine daily stats from Argentina.
 ```
 - type: vaccines
   text_summary_enabled: true
   graph_period_days: 14
 ```
-`vaccines` posts a COVID-19 vaccine daily stats from Argentina.
 
 #### weather
+Posts current weather information (checkout `weather_forecast`, is cooler). 
 ```
 script:
 - type: weather
@@ -90,7 +104,6 @@ script:
 openweather:
   token: openweather_token
 ```
-`weather` will post some current weather information (`weather_forecast` is cooler). 
 
 [Get an API Token](https://openweathermap.org/api)
 
