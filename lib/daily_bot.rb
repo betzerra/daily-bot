@@ -1,6 +1,7 @@
 require 'yaml'
 require 'ostruct'
 
+require_relative 'clarinete_news_message_step'
 require_relative 'covid_step'
 require_relative 'dollar_step'
 require_relative 'random_gif_step'
