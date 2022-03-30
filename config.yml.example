@@ -3,6 +3,7 @@ telegram:
   chat_id: chat_id
 
 script:
+  - type: clarinete_news
   - type: squanchy
   - type: random_message
     messages:
