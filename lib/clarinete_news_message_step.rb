@@ -11,13 +11,27 @@ class ClarineteNewsMessageStep < TelegramStep
   private
 
   def formatted_trends
-    trends.take(3).map do |trend|
+    trends.take(5).map do |trend|
       "- *#{trend['name']}:* #{trend['title']} [link](#{trend['url']})"
     end
   end
 
   def trends
-    @trends ||= request_trends
+    @trends ||= refine_trends(request_trends)
+  end
+
+  def refine_trends(trends)
+    seen = []
+    results = []
+    trends.each do |item|
+      unless seen.include? item['name']
+        results.append item
+        seen.append item['name']
+      end
+      seen.append(*item['related_topics'])
+    end
+
+    results
   end
 
   def request_trends
